@@ -1,0 +1,34 @@
+LIBRARY Interlocked64.dll
+
+DESCRIPTION "64bit access to Interlocked* MS compiler intrincs"
+
+EXPORTS
+    x64InterlockedIncrement       @1
+    x64InterlockedIncrement16     @2
+    x64InterlockedIncrement64     @3
+    x64InterlockedDecrement       @4
+    x64InterlockedDecrement64     @5
+    x64InterlockedDecrement16     @6
+    x64InterlockedExchange        @7
+    x64InterlockedExchange16      @8
+    x64InterlockedExchange64      @9
+    x64InterlockedExchange8       @10
+    x64InterlockedExchangePointer @11
+    x64InterlockedExchangeAdd     @12
+    x64InterlockedExchangeAdd64   @13
+    x64InterlockedAnd             @14
+    x64InterlockedAnd8            @15
+    x64InterlockedAnd16           @16
+    x64InterlockedAnd64           @17
+    x64InterlockedOr              @18
+    x64InterlockedOr8             @19
+    x64InterlockedOr16            @20
+    x64InterlockedOr64            @21
+    x64InterlockedXor             @22
+    x64InterlockedXor8            @23
+    x64InterlockedXor16           @24
+    x64InterlockedXor64           @25
+    x64InterlockedCompareExchange    @26
+    x64InterlockedCompareExchange16  @27
+    x64InterlockedCompareExchange64  @28
+    x64InterlockedCompareExchange128 @29

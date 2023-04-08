@@ -1,0 +1,123 @@
+[ Description ("") ]
+[ FormDesignerId ("CEF45C71-B5B8-4210-81BF-D5F6AF6E5F0F") ]
+[ PredeclaredId ]
+Class Form1
+/*
+InterlockedTest - Test Program for Interlocked64.dll
+Interlocked64.dll is designed to provide access to the Interlocked* functions to 64bit
+twinBASIC (and possibly VBA7 64bit, though I don't know what use it is there), as these
+are not exported from any system DLL under 64bit Windows; they're only available to x86 
+apps. On x64 they're only available as compiler intrinsics, and aren't easy to replicate
+in higher level code if possible at all, so the DLL had to be written in C++, as just a
+simple wrapper.
+
+The Acquire/Release/NoFence variants are not included as they do not appear to be any
+different, e.g.
+#define InterlockedExchangePointer _InterlockedExchangePointer
+#define InterlockedExchangePointerNoFence _InterlockedExchangePointer
+#define InterlockedExchangePointerAcquire _InterlockedExchangePointer
+
+(c) 2023 Jon Johnson (fafalone)
+
+
+
+NOTE: VBx and tB don't search the app path for DLLs by default.
+The typical workaround is to hard code the path, but who knows where you'll put this?
+An alternative is provided here **BUT IT ONLY WORKS FOR COMPILED EXES**.
+To use these functions from the IDE, or without the Set dir call, you can either hard
+code the path or place the DLL in System32.
+*/
+	Private Enum LoadLibraryFlags
+	DONT_RESOLVE_DLL_REFERENCES = &H00000001
+	LOAD_LIBRARY_AS_DATAFILE = &H00000002
+'  reserved for internal LOAD_PACKAGED_LIBRARY: 0x00000004
+	LOAD_WITH_ALTERED_SEARCH_PATH = &H00000008
+	LOAD_IGNORE_CODE_AUTHZ_LEVEL = &H00000010
+	LOAD_LIBRARY_AS_IMAGE_RESOURCE = &H00000020
+	LOAD_LIBRARY_AS_DATAFILE_EXCLUSIVE = &H00000040
+	LOAD_LIBRARY_REQUIRE_SIGNED_TARGET = &H00000080
+	LOAD_LIBRARY_SEARCH_DLL_LOAD_DIR = &H00000100
+	LOAD_LIBRARY_SEARCH_APPLICATION_DIR = &H00000200
+	LOAD_LIBRARY_SEARCH_USER_DIRS = &H00000400
+	LOAD_LIBRARY_SEARCH_SYSTEM32 = &H00000800
+	LOAD_LIBRARY_SEARCH_DEFAULT_DIRS = &H00001000
+	LOAD_LIBRARY_SAFE_CURRENT_DIRS = &H00002000
+	LOAD_LIBRARY_SEARCH_SYSTEM32_NO_FORWARDER = &H00004000
+End Enum
+Private DeclareWide PtrSafe Function SetDefaultDllDirectories Lib "kernel32" (ByVal DirectoryFlags As LoadLibraryFlags) As Long
+
+
+#If Win64 Then
+	Private DeclareWide PtrSafe Function InterlockedIncrement Lib "Interlocked64.dll" Alias "x64InterlockedIncrement" (Addend As Long) As Long
+    Private DeclareWide PtrSafe Function InterlockedDecrement Lib "Interlocked64.dll" Alias "x64InterlockedDecrement" (Addend As Long) As Long
+    Private DeclareWide PtrSafe Function InterlockedIncrement16 Lib "Interlocked64.dll" Alias "x64InterlockedIncrement16" (Addend As Integer) As Integer
+    Private DeclareWide PtrSafe Function InterlockedDecrement16 Lib "Interlocked64.dll" Alias "x64InterlockedDecrement16" (Addend As Integer) As Integer
+    Private DeclareWide PtrSafe Function InterlockedIncrement64 Lib "Interlocked64.dll" Alias "x64InterlockedIncrement64" (Addend As LongLong) As LongLong
+    Private DeclareWide PtrSafe Function InterlockedDecrement64 Lib "Interlocked64.dll" Alias "x64InterlockedDecrement64" (Addend As LongLong) As LongLong
+    
+    Private DeclareWide PtrSafe Function InterlockedExchange Lib "Interlocked64.dll" Alias "x64InterlockedExchange" (target As Long, ByVal value As Long) As Long
+    Private DeclareWide PtrSafe Function InterlockedExchangeRef Lib "Interlocked64.dll" Alias "x64InterlockedExchange64" (target As LongLong, value As Any) As LongLong
+    Private DeclareWide PtrSafe Function InterlockedExchange8 Lib "Interlocked64.dll" Alias "x64InterlockedExchange8" (target As Byte, ByVal value As Byte) As Byte
+    Private DeclareWide PtrSafe Function InterlockedExchange16 Lib "Interlocked64.dll" Alias "x64InterlockedExchange16" (Destination As Integer, ByVal ExChange As Integer) As Integer
+    Private DeclareWide PtrSafe Function InterlockedExchange64 Lib "Interlocked64.dll" Alias "x64InterlockedExchange64" (target As LongLong, ByVal value As LongLong) As LongLong
+    
+    Private DeclareWide PtrSafe Function InterlockedExchangePointer Lib "Interlocked64.dll" Alias "x64InterlockedExchangePointer" (target As Any, value As Any) As LongPtr
+    
+    Private DeclareWide PtrSafe Function InterlockedExchangeAdd Lib "Interlocked64.dll" Alias "x64InterlockedExchangeAdd" (Addend As Long, ByVal value As Long) As Long
+    Private DeclareWide PtrSafe Function InterlockedExchangeAdd64 Lib "Interlocked64.dll" Alias "x64InterlockedExchangeAdd64" (Addend As LongLong, ByVal value As LongLong) As LongLong
+   
+    Private DeclareWide PtrSafe Function InterlockedAdd Lib "Interlocked64.dll" Alias "x64InterlockedAdd" (Addend As Long, ByVal value As Long) As Long
+    Private DeclareWide PtrSafe Function InterlockedAdd64 Lib "Interlocked64.dll" Alias "x64InterlockedAdd64" (Addend As LongLong, ByVal value As LongLong) As LongLong
+    
+    Private DeclareWide PtrSafe Function InterlockedAnd Lib "Interlocked64.dll" Alias "x64InterlockedAnd" (Destination As Long, ByVal value As Long) As Long
+    Private DeclareWide PtrSafe Function InterlockedAnd8 Lib "Interlocked64.dll" Alias "x64InterlockedAnd8" (Destination As Byte, ByVal value As Byte) As Byte
+    Private DeclareWide PtrSafe Function InterlockedAnd16 Lib "Interlocked64.dll" Alias "x64InterlockedAnd16" (Destination As Integer, ByVal value As Integer) As Integer
+    Private DeclareWide PtrSafe Function InterlockedAnd64 Lib "Interlocked64.dll" Alias "x64InterlockedAnd64" (Destination As LongLong, ByVal value As LongLong) As LongLong
+    
+    Private DeclareWide PtrSafe Function InterlockedOr Lib "Interlocked64.dll" Alias "x64InterlockedOr" (Destination As Long, ByVal value As Long) As Long
+    Private DeclareWide PtrSafe Function InterlockedOr8 Lib "Interlocked64.dll" Alias "x64InterlockedOr8" (Destination As Byte, ByVal value As Byte) As Byte
+    Private DeclareWide PtrSafe Function InterlockedOr16 Lib "Interlocked64.dll" Alias "x64InterlockedOr16" (Destination As Integer, ByVal value As Integer) As Integer
+    Private DeclareWide PtrSafe Function InterlockedOr64 Lib "Interlocked64.dll" Alias "x64InterlockedOr64" (Destination As LongLong, ByVal value As LongLong) As LongLong
+
+    Private DeclareWide PtrSafe Function InterlockedXOr Lib "Interlocked64.dll" Alias "x64InterlockedXOr" (Destination As Long, ByVal value As Long) As Long
+    Private DeclareWide PtrSafe Function InterlockedXOr8 Lib "Interlocked64.dll" Alias "x64InterlockedXOr8" (Destination As Byte, ByVal value As Byte) As Byte
+    Private DeclareWide PtrSafe Function InterlockedXOr16 Lib "Interlocked64.dll" Alias "x64InterlockedXOr16" (Destination As Integer, ByVal value As Integer) As Integer
+    Private DeclareWide PtrSafe Function InterlockedXOr64 Lib "Interlocked64.dll" Alias "x64InterlockedXOr64" (Destination As LongLong, ByVal value As LongLong) As LongLong
+
+    Private DeclareWide PtrSafe Function InterlockedCompareExchange Lib "Interlocked64.dll" Alias "x64InterlockedCompareExchange" (Destination As Long, ByVal Exchange As Long, ByVal Comperand As Long) As Long
+    Private DeclareWide PtrSafe Function InterlockedCompareExchange16 Lib "Interlocked64.dll" Alias "x64InterlockedCompareExchange16" (Destination As Integer, ByVal Exchange As Integer, ByVal Comperand As Integer) As Integer
+    Private DeclareWide PtrSafe Function InterlockedCompareExchange64 Lib "Interlocked64.dll" Alias "x64InterlockedCompareExchange64" (Destination As LongLong, ByVal Exchange As LongLong, ByVal Comperand As LongLong) As LongLong
+    Private DeclareWide PtrSafe Function InterlockedCompareExchange128 Lib "Interlocked128.dll" Alias "x64InterlockedCompareExchange128" (Destination As LongLong, ByVal ExchangeHigh As LongLong, ByVal ExchangeLow As LongLong, ByVal Comperand As Integer) As Byte
+    Private DeclareWide PtrSafe Function InterlockedCompareExchangePointer Lib "Interlocked64.dll" Alias "x64InterlockedCompareExchangePointer" (Destination As Any, Exchange As Any, Comperand As Any) As LongPtr
+    
+#Else
+'Included only for demo:
+    Private DeclareWide PtrSafe Function InterlockedIncrement Lib "kernel32" (Addend As Long) As Long
+    Private DeclareWide PtrSafe Function InterlockedDecrement Lib "kernel32" (Addend As Long) As Long
+#End If
+
+'Complete set for reference:
+
+    
+    Private Sub Form_Load() Handles Form.Load
+        SetDefaultDllDirectories LOAD_LIBRARY_SEARCH_APPLICATION_DIR Or LOAD_LIBRARY_SEARCH_SYSTEM32
+        #If Win64 Then
+        	Label1.Caption = "Running in 64bit mode; custom DLL will be used."
+        #Else
+            Label1.Caption = "WARNING: Running in 32bit mode, system DLL will be used."
+        #End If
+    End Sub
+    
+    Private Sub Command1_Click() Handles Command1.Click
+        Dim x As Long = CLng(Text1.Text)
+        InterlockedIncrement x
+        Text1.Text = CStr(x)
+    End Sub
+    
+    Private Sub Command2_Click() Handles Command2.Click
+        Dim x As Long = CLng(Text1.Text)
+        InterlockedDecrement x
+        Text1.Text = CStr(x)
+    End Sub
+    
+End Class
