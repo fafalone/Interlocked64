@@ -4,7 +4,7 @@
 		"Appearance": "vbAppear3d",
 		"AutoRedraw": false,
 		"BackColor": -2147483633,
-		"BorderStyle": "vbSizable",
+		"BorderStyle": "vbFixedSingle",
 		"Caption": "Form1",
 		"ClipControls": true,
 		"ControlBox": true,
@@ -24,7 +24,7 @@
 		"ForeColor": -2147483630,
 		"FormDesignerId": "{CEF45C71-B5B8-4210-81BF-D5F6AF6E5F0F}",
 		"HasDC": true,
-		"Height": 221,
+		"Height": 65,
 		"HelpContextID": 0,
 		"Icon": "",
 		"Index": -1,
@@ -51,11 +51,11 @@
 		"Picture": "",
 		"PictureDpiScaling": true,
 		"RightToLeft": false,
-		"ScaleHeight": 3315,
+		"ScaleHeight": 975,
 		"ScaleLeft": 0,
 		"ScaleMode": "vbTwips",
 		"ScaleTop": 0,
-		"ScaleWidth": 5700,
+		"ScaleWidth": 5625,
 		"ShowInTaskbar": true,
 		"StartupPosition": "vbStartUpScreen",
 		"TabFocusAutoSelect": false,
@@ -66,7 +66,7 @@
 		"Visible": true,
 		"WhatsThisButton": false,
 		"WhatsThisHelp": false,
-		"Width": 380,
+		"Width": 375,
 		"WindowState": "vbNormal",
 		"__IDEOptions": {
 			"alignToGrid": false,
@@ -76,7 +76,7 @@
 			"showGrid": true,
 			"showOutlines": false
 		},
-		"__lastUpdateMarker": 1126820025,
+		"__lastUpdateMarker": 1432675580,
 		"_children": [
 			{
 				"Anchors": {
