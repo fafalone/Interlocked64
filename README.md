@@ -58,6 +58,6 @@ Here's the full set of declares for the DLL:
     Private DeclareWide PtrSafe Function InterlockedCompareExchange Lib "Interlocked64.dll" Alias "x64InterlockedCompareExchange" (Destination As Long, ByVal Exchange As Long, ByVal Comperand As Long) As Long
     Private DeclareWide PtrSafe Function InterlockedCompareExchange16 Lib "Interlocked64.dll" Alias "x64InterlockedCompareExchange16" (Destination As Integer, ByVal Exchange As Integer, ByVal Comperand As Integer) As Integer
     Private DeclareWide PtrSafe Function InterlockedCompareExchange64 Lib "Interlocked64.dll" Alias "x64InterlockedCompareExchange64" (Destination As LongLong, ByVal Exchange As LongLong, ByVal Comperand As LongLong) As LongLong
-    Private DeclareWide PtrSafe Function InterlockedCompareExchange128 Lib "Interlocked128.dll" Alias "x64InterlockedCompareExchange128" (Destination As LongLong, ByVal ExchangeHigh As LongLong, ByVal ExchangeLow As LongLong, ByVal Comperand As Integer) As Byte
+    Private DeclareWide PtrSafe Function InterlockedCompareExchange128 Lib "Interlocked64.dll" Alias "x64InterlockedCompareExchange128" (Destination As LongLong, ByVal ExchangeHigh As LongLong, ByVal ExchangeLow As LongLong, ByVal Comperand As Integer) As Byte
     Private DeclareWide PtrSafe Function InterlockedCompareExchangePointer Lib "Interlocked64.dll" Alias "x64InterlockedCompareExchangePointer" (Destination As Any, Exchange As Any, Comperand As Any) As LongPtr
 ```
