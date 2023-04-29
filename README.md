@@ -13,6 +13,8 @@ VBx and tB don't search the app path for DLLs by default.
 The typical workaround is to hard code the path, but who knows where you'll put this? An alternative is provided here **BUT IT ONLY WORKS FOR COMPILED EXES**.
 To use these functions from the IDE, or without the Set dir call, you can either hard code the path or place the DLL in System32.
 
+Update: It turns out tB has a built-in equivalent of that method that will also work under the IDE; you can use the attribute `[ SetDllDirectory (True) ]` for either individual declares, or at the module level (placing it before `Module foo` or `Clqss foo`) to apply to all API declares in that module.
+
 ### Declarations
 Here's the full set of declares for the DLL:
 
