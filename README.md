@@ -15,9 +15,11 @@ Import Library "/StaticLibraries/Interlocked64.obj" As Interlocked
 
 Module MyModule
     
-    Private DeclareWide PtrSafe Function InterlockedIncrement Lib Interlocked Alias "x64InterlockedIncrement" (Addend As Long) As Long
+    Private DeclareWide PtrSafe Function InterlockedIncrement CDecl Lib Interlocked Alias "x64InterlockedIncrement" (Addend As Long) As Long
 ...
 ```
+
+(The CDecl is ignored on x64, but it's good practice to leave it there, in case you ever make a 32bit version, or just to remind you)
 
 See below for the rest of the definitions in this format (it's just replacing "Interlocked64.dll" with Interlocked.
 
@@ -87,45 +89,45 @@ Here's the full set of declares for the DLL:
 and for static linking:
 
 ```vba
-    Private DeclareWide PtrSafe Function InterlockedIncrement Lib Interlocked Alias "x64InterlockedIncrement" (Addend As Long) As Long
-    Private DeclareWide PtrSafe Function InterlockedDecrement Lib Interlocked Alias "x64InterlockedDecrement" (Addend As Long) As Long
-    Private DeclareWide PtrSafe Function InterlockedIncrement16 Lib Interlocked Alias "x64InterlockedIncrement16" (Addend As Integer) As Integer
-    Private DeclareWide PtrSafe Function InterlockedDecrement16 Lib Interlocked Alias "x64InterlockedDecrement16" (Addend As Integer) As Integer
-    Private DeclareWide PtrSafe Function InterlockedIncrement64 Lib Interlocked Alias "x64InterlockedIncrement64" (Addend As LongLong) As LongLong
-    Private DeclareWide PtrSafe Function InterlockedDecrement64 Lib Interlocked Alias "x64InterlockedDecrement64" (Addend As LongLong) As LongLong
+    Private DeclareWide PtrSafe Function InterlockedIncrement CDecl Lib Interlocked Alias "x64InterlockedIncrement" (Addend As Long) As Long
+    Private DeclareWide PtrSafe Function InterlockedDecrement CDecl Lib Interlocked Alias "x64InterlockedDecrement" (Addend As Long) As Long
+    Private DeclareWide PtrSafe Function InterlockedIncrement16 CDecl Lib Interlocked Alias "x64InterlockedIncrement16" (Addend As Integer) As Integer
+    Private DeclareWide PtrSafe Function InterlockedDecrement16 CDecl Lib Interlocked Alias "x64InterlockedDecrement16" (Addend As Integer) As Integer
+    Private DeclareWide PtrSafe Function InterlockedIncrement64 CDecl Lib Interlocked Alias "x64InterlockedIncrement64" (Addend As LongLong) As LongLong
+    Private DeclareWide PtrSafe Function InterlockedDecrement64 CDecl Lib Interlocked Alias "x64InterlockedDecrement64" (Addend As LongLong) As LongLong
     
-    Private DeclareWide PtrSafe Function InterlockedExchange Lib Interlocked Alias "x64InterlockedExchange" (target As Long, ByVal value As Long) As Long
-    Private DeclareWide PtrSafe Function InterlockedExchangeRef Lib Interlocked Alias "x64InterlockedExchange64" (target As LongLong, value As Any) As LongLong
-    Private DeclareWide PtrSafe Function InterlockedExchange8 Lib Interlocked Alias "x64InterlockedExchange8" (target As Byte, ByVal value As Byte) As Byte
-    Private DeclareWide PtrSafe Function InterlockedExchange16 Lib Interlocked Alias "x64InterlockedExchange16" (Destination As Integer, ByVal ExChange As Integer) As Integer
-    Private DeclareWide PtrSafe Function InterlockedExchange64 Lib Interlocked Alias "x64InterlockedExchange64" (target As LongLong, ByVal value As LongLong) As LongLong
+    Private DeclareWide PtrSafe Function InterlockedExchange CDecl Lib Interlocked Alias "x64InterlockedExchange" (target As Long, ByVal value As Long) As Long
+    Private DeclareWide PtrSafe Function InterlockedExchangeRef CDecl Lib Interlocked Alias "x64InterlockedExchange64" (target As LongLong, value As Any) As LongLong
+    Private DeclareWide PtrSafe Function InterlockedExchange8 CDecl Lib Interlocked Alias "x64InterlockedExchange8" (target As Byte, ByVal value As Byte) As Byte
+    Private DeclareWide PtrSafe Function InterlockedExchange16 CDecl Lib Interlocked Alias "x64InterlockedExchange16" (Destination As Integer, ByVal ExChange As Integer) As Integer
+    Private DeclareWide PtrSafe Function InterlockedExchange64 CDecl Lib Interlocked Alias "x64InterlockedExchange64" (target As LongLong, ByVal value As LongLong) As LongLong
     
-    Private DeclareWide PtrSafe Function InterlockedExchangePointer Lib Interlocked Alias "x64InterlockedExchangePointer" (target As Any, value As Any) As LongPtr
+    Private DeclareWide PtrSafe Function InterlockedExchangePointer CDecl Lib Interlocked Alias "x64InterlockedExchangePointer" (target As Any, value As Any) As LongPtr
     
-    Private DeclareWide PtrSafe Function InterlockedExchangeAdd Lib Interlocked Alias "x64InterlockedExchangeAdd" (Addend As Long, ByVal value As Long) As Long
-    Private DeclareWide PtrSafe Function InterlockedExchangeAdd64 Lib Interlocked Alias "x64InterlockedExchangeAdd64" (Addend As LongLong, ByVal value As LongLong) As LongLong
+    Private DeclareWide PtrSafe Function InterlockedExchangeAdd CDecl Lib Interlocked Alias "x64InterlockedExchangeAdd" (Addend As Long, ByVal value As Long) As Long
+    Private DeclareWide PtrSafe Function InterlockedExchangeAdd64 CDecl Lib Interlocked Alias "x64InterlockedExchangeAdd64" (Addend As LongLong, ByVal value As LongLong) As LongLong
    
-    Private DeclareWide PtrSafe Function InterlockedAdd Lib Interlocked Alias "x64InterlockedAdd" (Addend As Long, ByVal value As Long) As Long
-    Private DeclareWide PtrSafe Function InterlockedAdd64 Lib Interlocked Alias "x64InterlockedAdd64" (Addend As LongLong, ByVal value As LongLong) As LongLong
+    Private DeclareWide PtrSafe Function InterlockedAdd CDecl Lib Interlocked Alias "x64InterlockedAdd" (Addend As Long, ByVal value As Long) As Long
+    Private DeclareWide PtrSafe Function InterlockedAdd64 CDecl Lib Interlocked Alias "x64InterlockedAdd64" (Addend As LongLong, ByVal value As LongLong) As LongLong
     
-    Private DeclareWide PtrSafe Function InterlockedAnd Lib Interlocked Alias "x64InterlockedAnd" (Destination As Long, ByVal value As Long) As Long
-    Private DeclareWide PtrSafe Function InterlockedAnd8 Lib Interlocked Alias "x64InterlockedAnd8" (Destination As Byte, ByVal value As Byte) As Byte
-    Private DeclareWide PtrSafe Function InterlockedAnd16 Lib Interlocked Alias "x64InterlockedAnd16" (Destination As Integer, ByVal value As Integer) As Integer
-    Private DeclareWide PtrSafe Function InterlockedAnd64 Lib Interlocked Alias "x64InterlockedAnd64" (Destination As LongLong, ByVal value As LongLong) As LongLong
+    Private DeclareWide PtrSafe Function InterlockedAnd CDecl Lib Interlocked Alias "x64InterlockedAnd" (Destination As Long, ByVal value As Long) As Long
+    Private DeclareWide PtrSafe Function InterlockedAnd8 CDecl Lib Interlocked Alias "x64InterlockedAnd8" (Destination As Byte, ByVal value As Byte) As Byte
+    Private DeclareWide PtrSafe Function InterlockedAnd16 CDecl Lib Interlocked Alias "x64InterlockedAnd16" (Destination As Integer, ByVal value As Integer) As Integer
+    Private DeclareWide PtrSafe Function InterlockedAnd64 CDecl Lib Interlocked Alias "x64InterlockedAnd64" (Destination As LongLong, ByVal value As LongLong) As LongLong
     
-    Private DeclareWide PtrSafe Function InterlockedOr Lib Interlocked Alias "x64InterlockedOr" (Destination As Long, ByVal value As Long) As Long
-    Private DeclareWide PtrSafe Function InterlockedOr8 Lib Interlocked Alias "x64InterlockedOr8" (Destination As Byte, ByVal value As Byte) As Byte
-    Private DeclareWide PtrSafe Function InterlockedOr16 Lib Interlocked Alias "x64InterlockedOr16" (Destination As Integer, ByVal value As Integer) As Integer
-    Private DeclareWide PtrSafe Function InterlockedOr64 Lib Interlocked Alias "x64InterlockedOr64" (Destination As LongLong, ByVal value As LongLong) As LongLong
+    Private DeclareWide PtrSafe Function InterlockedOr CDecl Lib Interlocked Alias "x64InterlockedOr" (Destination As Long, ByVal value As Long) As Long
+    Private DeclareWide PtrSafe Function InterlockedOr8 CDecl Lib Interlocked Alias "x64InterlockedOr8" (Destination As Byte, ByVal value As Byte) As Byte
+    Private DeclareWide PtrSafe Function InterlockedOr16 CDecl Lib Interlocked Alias "x64InterlockedOr16" (Destination As Integer, ByVal value As Integer) As Integer
+    Private DeclareWide PtrSafe Function InterlockedOr64 CDecl Lib Interlocked Alias "x64InterlockedOr64" (Destination As LongLong, ByVal value As LongLong) As LongLong
 
-    Private DeclareWide PtrSafe Function InterlockedXOr Lib Interlocked Alias "x64InterlockedXOr" (Destination As Long, ByVal value As Long) As Long
-    Private DeclareWide PtrSafe Function InterlockedXOr8 Lib Interlocked Alias "x64InterlockedXOr8" (Destination As Byte, ByVal value As Byte) As Byte
-    Private DeclareWide PtrSafe Function InterlockedXOr16 Lib Interlocked Alias "x64InterlockedXOr16" (Destination As Integer, ByVal value As Integer) As Integer
-    Private DeclareWide PtrSafe Function InterlockedXOr64 Lib Interlocked Alias "x64InterlockedXOr64" (Destination As LongLong, ByVal value As LongLong) As LongLong
+    Private DeclareWide PtrSafe Function InterlockedXOr CDecl Lib Interlocked Alias "x64InterlockedXOr" (Destination As Long, ByVal value As Long) As Long
+    Private DeclareWide PtrSafe Function InterlockedXOr8 CDecl Lib Interlocked Alias "x64InterlockedXOr8" (Destination As Byte, ByVal value As Byte) As Byte
+    Private DeclareWide PtrSafe Function InterlockedXOr16 CDecl Lib Interlocked Alias "x64InterlockedXOr16" (Destination As Integer, ByVal value As Integer) As Integer
+    Private DeclareWide PtrSafe Function InterlockedXOr64 CDecl Lib Interlocked Alias "x64InterlockedXOr64" (Destination As LongLong, ByVal value As LongLong) As LongLong
 
-    Private DeclareWide PtrSafe Function InterlockedCompareExchange Lib Interlocked Alias "x64InterlockedCompareExchange" (Destination As Long, ByVal Exchange As Long, ByVal Comperand As Long) As Long
-    Private DeclareWide PtrSafe Function InterlockedCompareExchange16 Lib Interlocked Alias "x64InterlockedCompareExchange16" (Destination As Integer, ByVal Exchange As Integer, ByVal Comperand As Integer) As Integer
-    Private DeclareWide PtrSafe Function InterlockedCompareExchange64 Lib Interlocked Alias "x64InterlockedCompareExchange64" (Destination As LongLong, ByVal Exchange As LongLong, ByVal Comperand As LongLong) As LongLong
-    Private DeclareWide PtrSafe Function InterlockedCompareExchange128 Lib Interlocked Alias "x64InterlockedCompareExchange128" (Destination As LongLong, ByVal ExchangeHigh As LongLong, ByVal ExchangeLow As LongLong, ByVal Comperand As Integer) As Byte
-    Private DeclareWide PtrSafe Function InterlockedCompareExchangePointer Lib Interlocked Alias "x64InterlockedCompareExchangePointer" (Destination As Any, Exchange As Any, Comperand As Any) As LongPtr
+    Private DeclareWide PtrSafe Function InterlockedCompareExchange CDecl Lib Interlocked Alias "x64InterlockedCompareExchange" (Destination As Long, ByVal Exchange As Long, ByVal Comperand As Long) As Long
+    Private DeclareWide PtrSafe Function InterlockedCompareExchange16 CDecl Lib Interlocked Alias "x64InterlockedCompareExchange16" (Destination As Integer, ByVal Exchange As Integer, ByVal Comperand As Integer) As Integer
+    Private DeclareWide PtrSafe Function InterlockedCompareExchange64 CDecl Lib Interlocked Alias "x64InterlockedCompareExchange64" (Destination As LongLong, ByVal Exchange As LongLong, ByVal Comperand As LongLong) As LongLong
+    Private DeclareWide PtrSafe Function InterlockedCompareExchange128 CDecl Lib Interlocked Alias "x64InterlockedCompareExchange128" (Destination As LongLong, ByVal ExchangeHigh As LongLong, ByVal ExchangeLow As LongLong, ByVal Comperand As Integer) As Byte
+    Private DeclareWide PtrSafe Function InterlockedCompareExchangePointer CDecl Lib Interlocked Alias "x64InterlockedCompareExchangePointer" (Destination As Any, Exchange As Any, Comperand As Any) As LongPtr
 ```
